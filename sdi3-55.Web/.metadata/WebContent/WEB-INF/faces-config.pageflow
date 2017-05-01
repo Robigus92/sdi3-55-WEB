@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14246831526460" configfile="/sdi2-55/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="178" id="pf14887271623900" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14887271623901 pf14901109728120" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="error.xhtml" x="770" y="381" id="pf14887271623902" referenceLink="//@navigationRule.6/@navigationCase.3/@toViewId|" inlinks="pf14887271623901 pf149011103168610 pf14902889251280 pf14902907780990 pf14902907780991" path="/error.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="1149" id="pf14887271623903" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" outlinks="pf14887271623904 pf14887271623905 pf14897699464750 pf14897699464751 pf14897699464752 pf14901109728131 pf14901109728132" inlinks="pf14897699464752 pf14897725206365 pf14901109728120" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="listado.xhtml" x="986" y="1351" id="pf14887271623906" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf14887271623904 pf148872716239010 pf14897699464751" path="/listado.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="altaForm.xhtml" x="122" y="1149" id="pf148872716239011" referenceLink="//@navigationRule.3/@navigationCase.1/@toViewId|" outlinks="pf14897725206365 pf14899360423020" inlinks="pf14887271623905 pf14899360423020" path="/altaForm.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="editForm.xhtml" x="770" y="765" id="pf148872716239012" referenceLink="//@navigationRule.6/@navigationCase.4/@toViewId|" outlinks="pf148872716239010" inlinks="pf149011103168611 pf14902889251281" path="/editForm.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="tareas.xhtml" x="554" y="1149" id="pf14897699464763" referenceLink="//@navigationRule.1/@navigationCase.2/@toViewId|" inlinks="pf14897699464750" path="/tareas.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="admin/listado.xhtml" x="554" y="765" id="pf14901109728138" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf149011103168611 pf149011103168610 pf149011103168612 pf149011103168613" inlinks="pf14901109728131 pf149011103168612 pf149011103168613" path="/admin/listado.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="user/listado_tasks.xhtml" x="554" y="381" id="pf14901109728139" referenceLink="//@navigationRule.6/@navigationCase.8/@toViewId|" outlinks="pf14902889251282 pf14902889251280 pf14902889251281 pf14902889251283 pf14902889251284 pf14902889251285 pf14902889251286 pf14902889251287 pf14902907780990" inlinks="pf14901109728132 pf14902889251282 pf14902889251283 pf14902889251284 pf14902889251285 pf14902889251286 pf14902907780992 pf14902907780993 pf14902907780994 pf14902907780995" path="/user/listado_tasks.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="user/edit_task_page.xhtml" x="338" y="381" id="pf14902889251288" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" outlinks="pf14902907780992 pf14902907780993 pf14902907780994 pf14902907780995 pf14902907780991" inlinks="pf14902889251287" path="/user/edit_task_page.xhtml"/>
+  <links id="pf14887271623901" target="pf14887271623902" source="pf14887271623900" outcome="error"/>
+  <links id="pf14887271623904" target="pf14887271623906" source="pf14887271623903" outcome="exito" fromaction="#{controller.listado}"/>
+  <links id="pf14887271623905" target="pf148872716239011" source="pf14887271623903" outcome="alta"/>
+  <links id="pf148872716239010" target="pf14887271623906" source="pf148872716239012" outcome="exito" fromaction="#{controller.salva}"/>
+  <links id="pf14897699464750" target="pf14897699464763" source="pf14887271623903" outcome="exito" fromaction="#{tareas.listado}"/>
+  <links id="pf14897699464751" target="pf14887271623906" source="pf14887271623903" outcome="exito" fromaction="#{login.verify}"/>
+  <links id="pf14897725206365" target="pf14887271623903" source="pf148872716239011" outcome="exito" fromaction="#{register.save}"/>
+  <links id="pf14901109728120" target="pf14887271623903" source="pf14887271623900" outcome="exito" fromaction="#{login.closeSession}"/>
+  <links id="pf14901109728131" target="pf14901109728138" source="pf14887271623903" outcome="exito_admin" fromaction="#{login.verify}"/>
+  <links id="pf14901109728132" target="pf14901109728139" source="pf14887271623903" outcome="exito_user" fromaction="#{login.verify}"/>
+  <links id="pf149011103168611" target="pf148872716239012" source="pf14901109728138" outcome="editar"/>
+  <links id="pf149011103168610" target="pf14887271623902" source="pf14901109728138" outcome="error" fromaction="#{settings.resetAndPopolateDB}"/>
+  <links id="pf14902889251280" target="pf14887271623902" source="pf14901109728139" outcome="error" fromaction="#{tareas.goToEditTask(vtask)}"/>
+  <links id="pf14902889251281" target="pf148872716239012" source="pf14901109728139" outcome="editar"/>
+  <links id="pf14902889251287" target="pf14902889251288" source="pf14901109728139" outcome="exito" fromaction="#{tareas.goToEditTask(vtask)}"/>
+  <links id="pf14902907780992" target="pf14901109728139" source="pf14902889251288" outcome="exito" fromaction="#{tareas.listadoInboxTasks}"/>
+  <links id="pf14902907780993" target="pf14901109728139" source="pf14902889251288" outcome="exito" fromaction="#{tareas.listadoTodayTasks}"/>
+  <links id="pf14902907780994" target="pf14901109728139" source="pf14902889251288" outcome="exito" fromaction="#{tareas.listadoWeekTasks}"/>
+  <links id="pf14902907780990" target="pf14887271623902" source="pf14901109728139" outcome="error" fromaction="#{tareas.saveTask}"/>
+  <links id="pf14897699464752" target="pf14887271623903" source="pf14887271623903" outcome="error" fromaction="#{login.verify}">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf14899360423020" target="pf148872716239011" source="pf148872716239011" outcome="error" fromaction="#{register.save}">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf149011103168612" target="pf14901109728138" source="pf14901109728138" outcome="exito" fromaction="#{controller.baja(valumno)}">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf149011103168613" target="pf14901109728138" source="pf14901109728138" outcome="exito" fromaction="#{settings.resetAndPopolateDB}">
+    <bendPoints d1Height="-66" d2Height="-66"/>
+    <bendPoints d1Width="-94" d1Height="-66" d2Width="-94" d2Height="-66"/>
+    <bendPoints d1Width="-94" d2Width="-94"/>
+  </links>
+  <links id="pf14902889251282" target="pf14901109728139" source="pf14901109728139" outcome="exito" fromaction="#{tareas.saveTask}">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf14902889251283" target="pf14901109728139" source="pf14901109728139" outcome="exito" fromaction="#{tareas.listadoCategoryTasks(vcategory)}">
+    <bendPoints d1Height="-66" d2Height="-66"/>
+    <bendPoints d1Width="-94" d1Height="-66" d2Width="-94" d2Height="-66"/>
+    <bendPoints d1Width="-94" d2Width="-94"/>
+  </links>
+  <links id="pf14902889251284" target="pf14901109728139" source="pf14901109728139" outcome="exito" fromaction="#{tareas.eliminar(vtask)}">
+    <bendPoints d1Height="-96" d2Height="-96"/>
+    <bendPoints d1Width="-124" d1Height="-96" d2Width="-124" d2Height="-96"/>
+    <bendPoints d1Width="-124" d2Width="-124"/>
+  </links>
+  <links id="pf14902889251285" target="pf14901109728139" source="pf14901109728139" outcome="exito" fromaction="#{tareas.finalizar(vtask)}">
+    <bendPoints d1Height="-126" d2Height="-126"/>
+    <bendPoints d1Width="-154" d1Height="-126" d2Width="-154" d2Height="-126"/>
+    <bendPoints d1Width="-154" d2Width="-154"/>
+  </links>
+  <links id="pf14902889251286" target="pf14901109728139" source="pf14901109728139" outcome="exito" fromaction="#{tareas.listadoInboxTasks}">
+    <bendPoints d1Height="-156" d2Height="-156"/>
+    <bendPoints d1Width="-184" d1Height="-156" d2Width="-184" d2Height="-156"/>
+    <bendPoints d1Width="-184" d2Width="-184"/>
+  </links>
+  <links id="pf14902907780995" target="pf14901109728139" source="pf14902889251288" outcome="exito" fromaction="#{tareas.saveEditedTask}"/>
+  <links id="pf14902907780991" target="pf14887271623902" source="pf14902889251288" outcome="error" fromaction="#{tareas.saveEditedTask}"/>
+</pageflow:Pageflow>

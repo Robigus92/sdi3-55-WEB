@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<p:panelGrid id="GridRegister" columns="2" styleClass="formTable">
+#{msgs.userid}
+<h:panelGroup>
+			<p:inputText value="#{register.name}" required="true"
+				requiredMessage="#{msgs.formAlta_iduser_requiredMessage}"
+				validatorMessage="#{msgs.formAlta_iduser_validatorMessage}"
+				id="name_input_text">
+				<f:validateLength minimum="5" maximum="8" />
+			</p:inputText>
+			<p:message for="name_input_text" />
+		</h:panelGroup>
+#{msgs.correo}
+<h:panelGroup>
+			<p:inputText value="#{register.email}" required="true"
+				requiredMessage="#{msgs.formAlta_correo_requiredMessage}"
+				validatorMessage="#{msgs.formAlta_correo_validatorMessage}"
+				id="correo_input_text">
+				<f:validateRegex pattern=".+@.+\.[a-z]+" />
+			</p:inputText>
+			<p:message for="correo_input_text" />
+		</h:panelGroup>
+#{msgs.password_value}
+<h:panelGroup>
+			<p:inputText value="#{register.password}" required="true"
+				requiredMessage="#{msgs.formAlta_password_requiredMessage}"
+				validatorMessage="#{msgs.formAlta_password_validatorMessage}"
+				id="password_input_text"
+				type="password">
+				<f:validateLength minimum="8" maximum="16" />
+			</p:inputText>
+			<p:message for="password_input_text" />
+		</h:panelGroup>
+#{msgs.repeat_password_value}
+		<h:panelGroup>
+			<p:inputText value="#{register.password2}" required="true"
+				requiredMessage="#{msgs.formAlta_password_requiredMessage}"
+				validatorMessage="#{msgs.formAlta_password_validatorMessage}"
+				id="password2_input_text"
+				type="password">
+				<f:validateLength minimum="8" maximum="16" />
+			</p:inputText>
+			<p:message for="password2_input_text" />
+		</h:panelGroup>
+		<p:commandButton value="#{msgs.botonSalvar}" 
+			action="#{register.save}" 
+			update="GridRegister" process="@form"
+			id="botonSalvar">
+		</p:commandButton>
+		#{msgs[register.result]}
+	</p:panelGrid>
+</ui:composition>

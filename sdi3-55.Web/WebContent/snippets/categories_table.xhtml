@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<p:panelGrid id="GridCategories" columns="2" styleClass="formTable">
+
+		<h:panelGroup>		
+			<p:dataTable id="categories_list" var="vcategory" 
+			value="#{categorias.categories}" border="1">
+				<p:column headerText="#{msgs.tablaTaskTitle}" 
+				sortBy="#{vcategory.name}">
+					<p:commandLink value="#{vcategory.name}" 
+						action="#{tareas.listadoCategoryTasks(vcategory)}" 
+						type="submit" immediate="true" update="@form">
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</h:panelGroup>
+	</p:panelGrid>
+</ui:composition>

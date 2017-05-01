@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<p:menubar id="mimenu">
+		<p:submenu id="misubmenu1" label="#{msgs.tituloOpciones}"
+			icon="ui-icon-document">
+			<p:menuitem id="linkListadoInbox" value="#{msgs.enlaceListadoInbox}"
+				action="#{tareas.listadoInboxTasks}" ajax="false" />
+			<p:menuitem id="linkListadoToday" value="#{msgs.enlaceListadoToday}"
+				action="#{tareas.listadoTodayTasks}" ajax="false" />
+			<p:menuitem id="linkListadoWeek" value="#{msgs.enlaceListadoWeek}"
+				action="#{tareas.listadoWeekTasks}" ajax="false" />
+			<p:separator />
+			<p:menuitem id="linkCerrarSesion" value="#{msgs.closeSessionButton}"
+				action="#{login.closeSession}" />
+		</p:submenu>
+		<p:submenu id="misubmenu2" style="float:right" label="#{msgs.textoIdioma}"
+			icon="ui-icon-document">
+			<p:menuitem id="linkespa" value="#{msgs.enlaceIdiomaES}"
+				actionListener="#{settings.setSpanish}" update="@all" />
+			<p:menuitem id="linkingles" value="#{msgs.enlaceIdiomaEN}"
+				actionListener="#{settings.setEnglish}" update="@all" />
+			<p:menuitem id="linkitalian" value="#{msgs.enlaceIdiomaIT}" 
+				actionListener="#{settings.setItalian}" update="@all"/>
+		</p:submenu>
+	</p:menubar>
+</ui:composition>

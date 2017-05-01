@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<p:panelGrid id="GridLogin" columns="2" styleClass="formTable">
+#{msgs.userid}
+<h:panelGroup>
+			<p:inputText value="#{login.name}" required="true"
+				requiredMessage="#{msgs.formAlta_iduser_requiredMessage}"
+				id="iduser">
+			</p:inputText>
+			<p:message for="iduser" />
+		</h:panelGroup>
+#{msgs.password_value}
+<h:panelGroup>
+			<p:inputText value="#{login.password}" required="true"
+				requiredMessage="#{msgs.formAlta_password_requiredMessage}"
+				id="password"
+				type="password">
+			</p:inputText>
+			<p:message for="password" />
+		</h:panelGroup>
+		<p:commandButton id="botonLogIn" value="#{msgs.botonLogIn}"
+			action="#{login.verify}" update="GridLogin" process="@form">
+		</p:commandButton>
+		#{msgs[login.result]}
+	</p:panelGrid>
+</ui:composition>

@@ -1,0 +1,104 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<p:panelGrid id="GridTasks" columns="2" styleClass="formTable">
+		<h:panelGroup>
+		  <h:panelGroup>
+		  <h:outputText value="Listas: "/>
+	        <p:commandButton value="#{msgs.enlaceListadoInbox}" 
+				action="#{tareas.listadoInboxTasks}" 
+				type="submit" immediate="true" update="@form">
+			</p:commandButton>
+			<p:commandButton value="#{msgs.enlaceListadoToday}" 
+				action="#{tareas.listadoTodayTasks}" 
+				type="submit" immediate="true" update="@form">
+			</p:commandButton>
+			<p:commandButton value="#{msgs.enlaceListadoWeek}" 
+				action="#{tareas.listadoWeekTasks}" 
+				type="submit" immediate="true" update="@form">
+			</p:commandButton>
+	        <br/>
+	        <h:panelGroup rendered="#{tareas.tipoListado=='inbox'}">
+		        <h:outputText value="Mostrar todo en Inbox: " />
+				<p:selectBooleanButton id="buttonAll" value="#{tareas.todo}" 
+				onLabel="Yes" offLabel="No" onIcon="ui-icon-check" 
+				offIcon="ui-icon-close" rendered="#{tareas.tipoListado=='inbox'}">
+					<p:ajax update="@form" 
+					listener="#{tareas.listadoInboxTasks}" />
+	        	</p:selectBooleanButton>
+        	</h:panelGroup>
+ 		  </h:panelGroup>
+			<p:dataTable id="tasks_list" var="vtask" value="#{tareas.tasks}" border="1"
+			rows="8" paginator="true" filteredValue="#{tareas.filteredTasks}">
+				<p:column id="column_task_title" headerText="#{msgs.tablaTaskTitle}" sortBy="#{vtask.title}"
+				filterBy="#{vtask.title}" filterMatchMode="contains">
+					<h:outputText value="#{vtask.title}"  
+					style="#{vtask.finished!=null ? 'color:Green;' : ''}"
+					id="text_title"/>
+				</p:column>
+				<p:column headerText="#{msgs.tablaTaskCreatedDate}" sortBy="#{vtask.created}">
+					<h:outputText value="#{vtask.created}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET"/>
+					</h:outputText>
+				</p:column>
+				<p:column headerText="#{msgs.tablaTaskPlannedDate}" sortBy="#{vtask.planned}">
+					<h:outputText value="#{vtask.planned}" 
+					style="#{task.beforeOfToday(vtask.planned)
+					and tareas.tipoListado!='week' ? 'color:Red;' : ''}"
+					id="text_planned_date">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET"/>
+					</h:outputText>
+				</p:column>
+				<p:column headerText="#{msgs.tablaTaskFinishedDate}" sortBy="#{vtask.finished}"
+					rendered="#{tareas.tipoListado=='inbox' and tareas.todo==true}">
+					<h:outputText value="#{vtask.finished}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET"/>
+					</h:outputText>
+				</p:column>
+				<p:column headerText="#{msgs.tablaTaskCategory}"  sortBy="#{vtask.categoryId}"
+					rendered="#{tareas.tipoListado!='inbox'}">
+					<h:outputText value="#{categorias.getCategoryNameById(vtask.categoryId)}" 
+					style="#{task.beforeOfToday(vtask.planned) 
+					and tareas.tipoListado=='week' ? 'color:Red;' : ''}" 
+					id="text_category"/>
+				</p:column>
+				<p:column headerText="#{msgs.tablaTaskComments}">
+					<h:outputText value="#{vtask.comments}" />
+				</p:column>
+				<p:column headerText="#{msgs.tablaAcciones}">
+				
+					<p:commandButton action="#{tareas.finalizar(vtask)}" 
+						rendered="#{vtask.finished==null}"
+						type="submit" value="#{msgs.enlaceFinalizar}" 
+						immediate="true" update="@form"
+						id="link_mark_as_done">
+					</p:commandButton>
+					
+					<p:commandButton action="#{tareas.goToEditTask(vtask)}"
+						rendered="#{vtask.finished==null}"
+						type="submit" value="#{msgs.enlaceEditar}" 
+						immediate="true"
+						id="link_edit_task">
+					</p:commandButton>
+					
+					<p:commandButton action="#{tareas.eliminar(vtask)}" 
+						type="submit" value="#{msgs.enlaceBaja}" 
+						immediate="true" update="@form">
+					  <p:confirm header="#{msgs.confirmarTitulo}" 
+						message="#{msgs.confirmarSeguro}" 
+						icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:confirmDialog global="true" showEffect="fade" 
+				  hideEffect="fade">
+        			<p:commandButton id="alertYes" value="#{msgs.confirmarSi}" type="button" 
+        			  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        			<p:commandButton id="alertNo" value="#{msgs.confirmarNo}" type="button" 
+        			  styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+		</h:panelGroup>
+	</p:panelGrid>
+</ui:composition>

@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<p:panelGrid id="Grid_edit_task_form" columns="1" styleClass="formTable">
+		<h:panelGroup>
+			<p:outputLabel for="task_title" value="#{msgs.TituloEditTask}" />
+			<p:inputText value="#{task.title}" required="true"
+				requiredMessage="#{msgs.formNewTask_task_required}"
+				id="task_title">
+			</p:inputText>
+			<p:message for="task_title" />
+		</h:panelGroup>
+		<h:panelGroup>
+			<p:outputLabel for="popup_fp" value="#{msgs.FechaPlaneada}" />
+			<p:calendar id="popup_fp" value="#{task.planned}" />
+			<p:message for="popup_fp" />
+		</h:panelGroup>
+		<h:panelGroup>
+			<p:outputLabel for="category_list" value="#{msgs.tablaTaskCategory}" />
+	        <p:selectOneMenu id="category_list" value="#{task.categoryId}" style="width:125px">
+	        	<f:selectItem id="first_option" itemLabel="#{msgs.select_sin_categoria}" itemValue="#{null}" />
+	        	<f:selectItems id="option_#{c.name}" value="#{categorias.categories}" var="c" 
+	        	itemLabel="#{c.name}" itemValue="#{c.id}" />
+	        </p:selectOneMenu>
+	        <p:message for="category_list" />
+ 		</h:panelGroup>
+ 		<h:panelGroup>
+			<p:outputLabel for="comments_if" value="#{msgs.tablaTaskComments}" />
+	        <p:inputTextarea id="comments_if" rows="6" cols="33" value="#{task.comments}"/>
+	        <p:message for="comments_if" />
+ 		</h:panelGroup>
+		<h:panelGroup>
+			<p:commandButton value="#{msgs.boton_edit_task}" action="#{tareas.saveEditedTask}"
+				update="@form" process="@form" id="button_edit_task">
+			</p:commandButton>
+		</h:panelGroup>
+	</p:panelGrid>
+</ui:composition>

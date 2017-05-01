@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:ui="http://java.sun.com/jsf/facelets"
+ xmlns:p="http://primefaces.org/ui"
+ template="/template/template-general-sinopciones.xhtml">
+ <ui:define name="titulo">
+ #{msgs.tituloHead}
+ </ui:define>
+ <ui:define name="cuerpo">
+ 		<h:form id="login_form">
+ 			<p:messages id="messages" showDetail="true" autoUpdate="true" 
+			closable="true" />
+			<p:panel header="#{msgs.tituloOperacionLogin}" rendered="#{!login.logged}">
+				<ui:include src="/snippets/login_form.xhtml"/>
+			</p:panel>
+			<p:panel rendered="#{login.logged}">
+				<h:commandButton id="button_close_session" value="#{msgs.closeSessionButton}" action="#{login.closeSession}" />
+			</p:panel>
+		</h:form>
+ </ui:define>
+ <ui:define name="pie">
+ </ui:define>
+</ui:composition>

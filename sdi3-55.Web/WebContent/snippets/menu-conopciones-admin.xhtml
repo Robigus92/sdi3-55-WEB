@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<p:menubar id="mimenu">
+		<p:submenu id="misubmenu1" label="#{msgs.tituloOpciones}"
+			icon="ui-icon-document">
+			<p:menuitem id="linkListado" value="#{msgs.enlaceListado}"
+				action="#{controller.listado}" />
+			<p:menuitem id="linkResetDB" value="#{msgs.enlaceResetDB}"
+			action="#{controller.resetAndPopolateDB}" update="@all">
+				<p:confirm header="#{msgs.confirmarResetDB}"
+					message="#{msgs.confirmarSeguro}" icon="ui-icon-alert" />
+			</p:menuitem>
+			<p:separator />
+			<p:menuitem id="linkCerrarSesion" value="#{msgs.closeSessionButton}"
+			action="#{login.closeSession}" />
+		</p:submenu>
+		
+		<p:submenu id="misubmenu2" style="float:right" label="#{msgs.textoIdioma}"
+			icon="ui-icon-document">
+			<p:menuitem id="linkespa" value="#{msgs.enlaceIdiomaES}"
+				actionListener="#{settings.setSpanish}" update="@all" />
+			<p:menuitem id="linkingles" value="#{msgs.enlaceIdiomaEN}"
+				actionListener="#{settings.setEnglish}" update="@all" />
+			<p:menuitem id="linkitalian" value="#{msgs.enlaceIdiomaIT}"
+				actionListener="#{settings.setItalian}" update="@all" />
+		</p:submenu>
+	</p:menubar>
+
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="#{msgs.confirmarSi}" type="button"
+			styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+		<p:commandButton value="#{msgs.confirmarNo}" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	</p:confirmDialog>
+</ui:composition>

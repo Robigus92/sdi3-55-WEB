@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template-general-sinopciones.xhtml">
+
+	<ui:define name="titulo">
+    #{msgs.tituloOperacionAlta}
+  </ui:define>
+	<ui:define name="cuerpo">
+		<h:form id="form-principal">
+			<p:panel header="#{msgs.tituloOperacionAlta}" rendered="#{!login.logged}" >
+				<ui:include src="/snippets/register_form.xhtml"/>
+			</p:panel>
+			<p:panel rendered="#{login.logged}">
+				<h:outputText value="#{msgs.logged_advice}" />
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+	<ui:define name="pie">
+		<ui:include src="/snippets/pie-casa.xhtml" />
+	</ui:define>
+</ui:composition>

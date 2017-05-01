@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template-general.xhtml">
+
+	<ui:define name="titulo">
+    #{msgs.tituloOperacionListado}
+  </ui:define>
+
+	<ui:define name="cuerpo">
+		<h:form>
+			<p:messages id="messages" showDetail="true" autoUpdate="true" 
+			closable="true" />
+			<p:panel header="#{msgs.tituloOperacionListado}">
+				<p:dataTable id="tablalistado" var="vuser" 
+					value="#{controller.users}" border="1">
+				<p:column headerText="#{msgs.tablaIdUser}" 
+				  sortBy="#{vuser.login}">
+            		<h:outputText value="#{vuser.login}" />
+        		</p:column>
+        		<p:column headerText="#{msgs.tablaCorreo}" 
+				  sortBy="#{vuser.email}">
+            		<h:outputText value="#{vuser.email}" />
+        		</p:column>
+        		<p:column headerText="#{msgs.tablaEstado}" 
+				  sortBy="#{vuser.status}">
+            		<h:outputText value="#{vuser.status}" id="text_user_status"/>
+        		</p:column>
+        		<p:column headerText="#{msgs.tablaAcciones}">
+					<p:commandButton action="#{controller.changeStatus(vuser)}" 
+						type="submit" value="#{msgs.enlaceCambiarEstado}" 
+						immediate="true" update="tablalistado"
+						id="enlaceCambiarEstado">
+					</p:commandButton>
+					
+					<p:commandButton action="#{controller.baja(vuser)}" 
+						type="submit" value="#{msgs.enlaceBaja}" 
+						immediate="true" update="tablalistado"
+						id="enlaceBaja">
+					  <p:confirm header="#{msgs.confirmarTitulo}" 
+						message="#{msgs.confirmarSeguro}" 
+						icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+				</p:dataTable>
+				<p:confirmDialog global="true" showEffect="fade" 
+				  hideEffect="fade">
+        			<p:commandButton value="#{msgs.confirmarSi}" type="button" 
+        			  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" 
+        			  id="confirmarSi" />
+        			<p:commandButton value="#{msgs.confirmarNo}" type="button" 
+        			  styleClass="ui-confirmdialog-no" icon="ui-icon-close" 
+        			  id="confirmarNo" />
+				</p:confirmDialog>
+			</p:panel>
+		</h:form>
+	</ui:define>
+	<ui:define name="pie">
+		<ui:include src="/snippets/pie-casa.xhtml" />
+	</ui:define>
+</ui:composition>
